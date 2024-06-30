@@ -14,7 +14,7 @@ const LessonContent = ({items}) => {
         <Carousel>
           <CarouselContent>
             {items.map((elm) => 
-                <CarouselItem>
+                <CarouselItem key={elm}>
                     <h4 className='text-white'>
                       {elm}
                     </h4>
