@@ -101,7 +101,7 @@ export default function Home() {
           { loading ? 
 
                 <Audio
-                  className= "mt-6"
+                 
                   height="80"
                   width="80"
                   radius="9"
