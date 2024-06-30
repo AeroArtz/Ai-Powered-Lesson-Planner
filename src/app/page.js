@@ -2,9 +2,6 @@
 import { useState } from 'react';
 import { 
   GoogleGenerativeAI ,
-  HarmCategory,
-  HarmBlockThreshold
-
 } from "@google/generative-ai";
 
 import { Audio } from 'react-loader-spinner'
@@ -32,21 +29,32 @@ export default function Home() {
 
       const promptPrefix = `
       You are a teachers assistant, your job is to help teachers create a fun, interactive and well structured lesson plans for students with the following subheadings given below:
-      ● Learning Objectives
-      ● Materials Needed
-      ● Lesson Procedure
-      ● Assessment
-      ● Differentiation . Format the output to separate each section with a semicolon character before the section name except for the first section.
-      Generate a lesson plan for the following topic: \n
+        ● Learning Objectives
+        ● Materials Needed
+        ● Lesson Procedure
+        ● Assessment
+        ● Differentiation . Format the output as a json array , each element should have a title and content property.
+        Generate a lesson plan for the following topic:\n
       `
       const finalPrompt = promptPrefix + prompt
       const result = await model.generateContentStream(finalPrompt);
       const response = await result.response;
       const text = response.text();
-      const responseContent = text.split(';')
-      setResponse(responseContent)
+      const responseContent = text;
+
+      console.log(0)
+
+      // FORMATTING RESPONSE TO JSON OBJECT 
+      let formattedJson = responseContent.slice(7,responseContent.length-3)
+      formattedJson = formattedJson.replace(/u?'(.+?)': u?'(.+?)'/g, '"$1":"$2"');
+
+      formattedJson = (JSON.parse(formattedJson))
+
+      // SETTING STATE VARIABLE TO THE RESPONSE FROM GEMINI
+      setResponse(formattedJson)
     }
 
+    
 
     // FUNCTION TO HANDLE FORM SUBMISSION
     const handleSubmit = async (e) => {
@@ -67,8 +75,8 @@ export default function Home() {
 
           <div className=''>
 
-            <h1 className="mt-24 text-3xl font-semibold bg-gradient-to-r from-pink-200 from-10% via-pink-500 to-indigo-400 inline-block text-transparent bg-clip-text">
-              YOUR AI POWERED LESSON PLANNER
+            <h1 className="mt-24 text-4xl text-center font-semibold bg-gradient-to-r from-pink-200 from-10% via-pink-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+              YOUR AI POWERED LESSON <br></br> PLANNER
             </h1>
 
             <h3 className='text-white text-xs font-light mt-6 text-center'>
@@ -100,8 +108,8 @@ export default function Home() {
 
           { loading ? 
 
+                <div className='mt-6'>
                 <Audio
-                 
                   height="80"
                   width="80"
                   radius="9"
@@ -109,12 +117,15 @@ export default function Home() {
                   ariaLabel="loading"
                   wrapperStyle
                   wrapperClass
-                /> :
+                /> 
+                </div>
+                :
           
             response.length > 0 ? 
-              <LessonContent items = {response} />
+            <LessonContent items={response}/>
 
-            : null
+            : <div className='w-3/4 h-full mt-6 rounded-lg border border-gray-600 ml-10 mr-10'>
+              </div>
           
 
         }
