@@ -25,7 +25,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  NEXT_PUBLIC_GEMINI_API_KEY: AIzaSyA528j4h-IjEWV72ADCBubanYEjD5qnd84
+  NEXT_PUBLIC_GEMINI_API_KEY: ${{ secrets.NEXT_PUBLIC_GEMINI_API_KEY }}
 
 jobs:
   # Build job
