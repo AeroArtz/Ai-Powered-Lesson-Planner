@@ -63,7 +63,7 @@ export default function Home() {
 
     return (
 
-      <div className='flex flex-col bg-gray-950 w-full h-full items-center'>
+      <div className='flex flex-col bg-gray-950 w-full h-screen items-center'>
 
           <div className=''>
 
@@ -101,6 +101,7 @@ export default function Home() {
           { loading ? 
 
                 <Audio
+                  className= "mt-6"
                   height="80"
                   width="80"
                   radius="9"
