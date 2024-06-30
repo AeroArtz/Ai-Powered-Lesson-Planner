@@ -10,7 +10,7 @@ import LessonContent from '@/components/LessonContent';
 
 // DEFINING THE MODEL NAME AND ACCESSING THE API KEY
 const MODEL_NAME = "gemini-1.5-flash"
-const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+const GEMINI_API_KEY = "AIzaSyA528j4h-IjEWV72ADCBubanYEjD5qnd84";
 
 export default function Home() {
 
@@ -71,7 +71,7 @@ export default function Home() {
 
     return (
 
-      <div className='flex flex-col bg-gray-950 w-full h-screen items-center'>
+      <div className='flex flex-col bg-gray-950 w-full h-screen items-center justify-center'>
 
           <div className=''>
 
@@ -85,9 +85,9 @@ export default function Home() {
           
             <form onSubmit={handleSubmit}>
 
-              <div className='flex flex-row space-x-3 mt-12'>
+              <div className='flex flex-row max-sm:items-center max-sm:justify-center max-sm:space-x-1 space-x-3 mt-12'>
                 <input
-                    className='focus:outline-none text-sm text-gray-500 w-full py-1.5 pl-2 rounded-sm font-regular bg-gray-800 border-0'
+                    className='focus:outline-none max-sm:w-2/4 text-sm text-gray-500 w-full py-1.5 pl-2 rounded-sm font-regular bg-gray-800 border-0'
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
                     placeholder="Enter your prompt"
