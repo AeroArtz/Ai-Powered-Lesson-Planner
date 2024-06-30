@@ -24,6 +24,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+env:
+  NEXT_PUBLIC_GEMINI_API_KEY: AIzaSyA528j4h-IjEWV72ADCBubanYEjD5qnd84
+
 jobs:
   # Build job
   build:
